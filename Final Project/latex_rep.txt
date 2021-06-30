@@ -1,0 +1,159 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{blindtext}
+\usepackage{url}
+\date{\today}
+\begin{document}
+\begin{titlepage}
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{0pt}
+    \begingroup\flushleft
+    \Large Name : Marwa Abdullah Mohamed\\
+            Sec : 2     \\  
+            BN : 28 \par
+    \endgroup
+    \rule{0pt}{10ex}
+    \begingroup
+    \centering
+    \Large
+    \MakeUppercase{%
+    \LARGE Stochastic Final Project}\par
+    \endgroup
+
+\section{\Large Problem $\And$ Requirements}
+The signal equation is defined as follows:\newline
+\centerline{$y(n) = c0x(n) + c1x(n-1) + c2x(n-2)+ c3x(n-3) + v(n)$}\newline
+where: y(n) is the distorted signal. x(n) is the source signal, and v(n) is WGN v(n) \sim N (0, $\sigma ^{2})$ 
+ $c0 = -1 $ $c1 = -0.75 $ $c2 = -0.5 $ $c3 = -0.25 $   and $\sigma_v ^{2}$ = 0.01
+\begin{description}
+
+\item [$\bullet$ ] Using provided model, build a fifth order Wiener filter.
+\item [$\bullet$ ]  Apply this filter on the signal and show the  output.
+\item [$\bullet$ ] Calculate mean square error of filtered signal (Source signal is provided for that).
+
+\end{description}
+
+\section{\Large Solving The equations to get C matrix}
+
+$y(n) = c0x(n) + c1x(n-1) + c2x(n-2)+ c3x(n-3) + v(n)$ \newline  \newline
+\large \bullet $At (n = 0) :$ \newline \newline
+$R_{yy}(0) = E[y(n) y(n)]$\newline
+$R_{yy}(0) = E[y(n) (c0x(n) + c1x(n-1) + c2x(n-2)+ c3x(n-3) + v(n))]$\newline
+$ = c0 E[x(n)y(n)] + c1 E[x(n-1)y(n)]+ c2 E[x(n-2)y(n)] + c3 E[x(n-3)y(n)] +  E[v(n) y(n)]$\newline
+$ = c0 E[x(n)y(n)] + c1 E[x(n-1)y(n)]+ c2 E[x(n-2)y(n)] + c3 E[x(n-3)y(n)] + E[v^2(n)]$\newline
+$R_{yy}(0) - 0.01  = c0 R_{xy}(0) + c1 R_{xy}(1) + c2 R_{xy}(2)+ c3 R_{xy}(3) ............(1)$\newline \newline 
+
+\large \bullet $At (n = 1) :$\newline \newline
+$R_{yy}(1) = E[y(n-1) y(n)]$\newline
+$R_{yy}(1) = E[y(n-1) (c0x(n) + c1x(n-1) + c2x(n-2)+ c3x(n-3) + v(n))]$\newline
+$ = c0 R_{xy}(1) + c1 R_{xy}(0) + c2 R_{xy}(-1)+ c3 R_{xy}(-2) $\newline
+$ R_{xy}(-1) = R_{xy}(1) $\newline
+$R_{yy}(1) = (c0 + c2) R_{xy}(1) + c1 R_{xy}(0) + c3 R_{xy}(2)  ...............(2) $\newline\newline
+
+\large \bullet $At (n = 2) :$\newline \newline
+$R_{yy}(2) = E[y(n-2) y(n)]$\newline
+$R_{yy}(2) = c0 R_{xy}(2) + (c1+c3) R_{xy}(1) + c2 R_{xy}(0)  ...............(3) $\newline\newline
+
+\large \bullet $At (n = 3) :$\newline \newline
+$R_{yy}(3) = E[y(n-3) y(n)]$\newline
+$R_{yy}(3) = c0 R_{xy}(3) + c1 R_{xy}(2) + c2 R_{xy}(1)+ c3 R_{xy}(0)  ...............(4) $\newline\newline\newline
+
+\large \bullet $At (n = 4) :$\newline \newline
+$R_{yy}(4) = E[y(n-4) y(n)]$\newline
+$R_{yy}(4) = c0 R_{xy}(4) + c1 R_{xy}(3) + c2 R_{xy}(2)+ c3 R_{xy}(1)  ...............(5) $\newline\newline
+
+\large \bullet $At (n = 5) :$\newline \newline
+$R_{yy}(5) = E[y(n-5) y(n)]$\newline
+$R_{yy}(5) = c0 R_{xy}(5) + c1 R_{xy}(4) + c2 R_{xy}(3)+ c3 R_{xy}(2)  ...............(6) $\newline
+
+\Large From eqn.1 to eqn.5 we get (Using Python To get Matrices ):
+
+\begin{equation}
+\hspace  R_{yy} = 
+\begin{bmatrix} $R_{yy}(0)$\\ $R_{yy}(1)$\\  $R_{yy}(2)$\\ $R_{yy}(3)$\\ $R_{yy}(4)$ \\ $R_{yy}(5)$ \end{bmatrix}
+ = 
+\begin{bmatrix}
+0.37022914 \\ 0.41682667 \\ 0.37804229 \\ 0.31820253 \\ 0.23307373 \\ 0.14933956 \\ 
+\end{bmatrix}
+\end{equation}
+
+\newline\newline
+
+\begin{equation}
+\begin{bmatrix} $R_{yy}(0) - 0.01 $\\ $R_{yy}(1)$\\  $R_{yy}(2)$\\ $R_{yy}(3)$\\ $R_{yy}(4)$ \\ $R_{yy}(5)$ \end{bmatrix}
+=
+\begin{bmatrix}
+c0 & c1 &c2 & c3  & 0 & 0 \\
+c1 & c0 + c2 &c3 & 0  & 0 & 0 \\
+c2 & c1+c3 &c0 & 0  & 0 & 0 \\
+c3 & c2 &c1 & c0  & 0 & 0 \\
+0 & c3 &c2 & c1  & c0 & 0 \\
+0 & 0 &c3 & c2  & c1 & c0 \\
+\end{bmatrix}
+\begin{bmatrix} $R_{xy}(0)$\\ $R_{xy}(1)$\\  $R_{xy}(2)$\\ $R_{xy}(3)$\\ $R_{xy}(4)$ \\ $R_{xy}(5)$ \end{bmatrix}
+\end{equation}
+
+\newline\newline
+\centerline{
+\begin{equation}
+\begin{bmatrix} $R_{xy}(0)$\\ $R_{xy}(1)$\\  $R_{xy}(2)$\\ $R_{xy}(3)$\\ $R_{xy}(4)$ \\ $R_{xy}(5)$ \end{bmatrix}
+
+=
+\left
+\begin{bmatrix}
+c0 & c1 &c2 & c3  & 0 & 0 \\
+c1 & c0 + c2 &c3 & 0  & 0 & 0 \\
+c2 & c1+c3 &c0 & 0  & 0 & 0 \\
+c3 & c2 &c1 & c0  & 0 & 0 \\
+0 & c3 &c2 & c1  & c0 & 0 \\
+0 & 0 &c3 & c2  & c1 & c0 \\
+\end{bmatrix}\right^{-1}
+\begin{bmatrix} $R_{yy}(0) - 0.01 $\\ $R_{yy}(1)$\\  $R_{yy}(2)$\\ $R_{yy}(3)$\\ $R_{yy}(4)$ \\ $R_{yy}(5)$ \end{bmatrix}
+\end{equation}
+}
+After substitute with c0,c1,c2,c3 Values:\newline \newline
+\centerline{
+C =
+\begin{bmatrix}
+-1 & -0.75 &-0.5 & -0.25  & 0 & 0 \\
+-0.75 & -1 + -0.5 &c3 & 0  & 0 & 0 \\
+-0.5 & -0.75+c3 &-1 & 0  & 0 & 0 \\
+c3 & -0.5 &-0.75 & -1  & 0 & 0 \\
+0 & c3 &-0.5 & -0.75  & -1 & 0 \\
+0 & 0 &c3 & -0.5  & -0.75 & -1 \\
+\end{bmatrix}}
+\section{\Large Results(using Python calculations)}
+
+\centerline{
+\begin{equation}
+
+\begin{bmatrix} 
+$h(0)$\\ $h(1)$\\  $h(2)$\\ $h(3)$\\ $h(4)$ \\ $h(5)$ \end{bmatrix}
+ = 
+\begin{bmatrix}
+
+-0.60992753 \\ 0.43250195 \\ -0.28395866 \\ -0.02426748 \\ -0.05485965 \\ 0.21663751 \\ 
+\end{bmatrix}
+\end{equation}
+}
+\newline\newline
+Calculate mean squared error of the filtered signal:
+$$\hat{x}(n)  = y(n) * h(n)$$ Then we get MSE = 0.0540871
+
+
+
+
+\subsection{\large Original VS Filtered Signals}
+
+\includegraphics[scale=0.7]{OrignalVsFiltered.jpg}
+
+\subsection{\large Filtered VS Distorted Signals}
+
+\includegraphics[scale=0.7]{filteredVsDistorted.jpg}
+
+\end{titlepage}
+\end{document}

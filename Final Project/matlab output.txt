@@ -1,0 +1,55 @@
+   ARIMA(5,0,0) Model:
+    --------------------
+    Conditional Probability Distribution: Gaussian
+
+                                  Standard          t     
+     Parameter       Value          Error       Statistic 
+    -----------   -----------   ------------   -----------
+     Constant      0.0835401      0.287627       0.290446
+        AR{1}       0.180354      0.427097        0.42228
+        AR{2}       0.128299      0.352935       0.363521
+        AR{3}      -0.267085      0.387042      -0.690067
+        AR{4}       0.599874      0.438459        1.36814
+        AR{5}       0.358557      0.404372         0.8867
+     Variance       0.196684      0.108503         1.8127
+Warning: Nonlinear inequality constraints are active; standard errors may be inaccurate. 
+> In arima/estimate (line 1113)
+  In control3 (line 64) 
+ 
+    ARIMA(0,0,4) Model:
+    --------------------
+    Conditional Probability Distribution: Gaussian
+
+                                  Standard          t     
+     Parameter       Value          Error       Statistic 
+    -----------   -----------   ------------   -----------
+     Constant     -0.0694227      0.104179      -0.666379
+        MA{1}       0.115936      0.387031       0.299553
+        MA{2}       -0.13676      0.344516      -0.396964
+        MA{3}      -0.905403      0.384502       -2.35474
+        MA{4}     -0.0737726      0.362014      -0.203784
+     Variance       0.163806      0.153756        1.06536
+Warning: Nonlinear inequality constraints are active; standard errors may be inaccurate. 
+> In arima/estimate (line 1113)
+  In control3 (line 65) 
+ 
+    ARIMA(3,0,4) Model:
+    --------------------
+    Conditional Probability Distribution: Gaussian
+
+                                  Standard          t     
+     Parameter       Value          Error       Statistic 
+    -----------   -----------   ------------   -----------
+     Constant      0.0298899      0.195697       0.152736
+        AR{1}       0.394281      0.481115       0.819517
+        AR{2}     -0.0682132      0.577098        -0.1182
+        AR{3}      -0.738181      0.463289       -1.59335
+        MA{1}      -0.448938      0.739444      -0.607129
+        MA{2}       0.176404      0.615608       0.286552
+        MA{3}       0.298927       0.63247       0.472635
+        MA{4}       0.457412      0.585633       0.781056
+     Variance        0.15079     0.0973279         1.5493
+
+testDataClass =
+
+     2
