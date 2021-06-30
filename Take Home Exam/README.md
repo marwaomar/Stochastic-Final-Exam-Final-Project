@@ -1,8 +1,8 @@
 ## Problem 1
 >Find the maximum likelihood estimate of the unknown parameters, a0 , and c0 , for the
 non-linear model of the random signal 
-![img](eqn.jpg)
-where:
+![img](eqn.jpg) <br>
+where:<br>
 • h ( n ) = c 0 exp(x ( n )).<br>
 • e ( n ) is zero mean unit variance uncorrelated Gaussian random signal.
 ## Problem 2
